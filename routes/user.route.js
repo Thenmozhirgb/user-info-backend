@@ -28,6 +28,24 @@ router.route('/').get((req, res) => {
   })
 })
 
+// Get Single user by user id
+router.route('/:userid').get((req, res) => {
+ 
+  console.log('req.params.userid='+req.params.userid);
+  
+ 
+  userSchema.find({userid: req.params.userid}, (error, data) => {
+    console.log('error=' +error);
+    console.log('data='+data);
+  if (error) {
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})  
+
+
 // Get Single user
 router.route('/edit-user/:id').get((req, res) => {
   userSchema.findById(req.params.id, (error, data) => {
